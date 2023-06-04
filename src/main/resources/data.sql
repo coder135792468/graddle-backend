@@ -18,3 +18,6 @@ values(20003,'I want to Get AWS Certified', 10002);
 
 insert into note(id,content,owner_id)
 values(20004,'I want to learn Multi Cloud', 10002);
+
+insert into note(id,content,owner_id)
+values(20005,'I want to learn Mathematics', 10003);
