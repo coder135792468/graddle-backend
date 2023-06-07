@@ -2,10 +2,13 @@ package com.note_share_res_api.backend_rest_api.modesl;
 
 
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Note {
@@ -19,6 +22,9 @@ public class Note {
     
     @ManyToOne
     private User owner;
+
+	@OneToMany
+	private List<User> likes;
      
 	public Integer getId() {
 		return id;
@@ -44,7 +50,13 @@ public class Note {
 	}
 
 
- 
+	public void setLikes(List<User> likes){
+		this.likes = likes;
+	}
+
+	public List<User> getLikes(){
+		return likes;
+	}
 
 	@Override
 	public String toString() {
