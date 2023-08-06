@@ -27,7 +27,7 @@ public class NoteController {
     
         return Sort.Direction.ASC;
       }
-
+    @CrossOrigin
     @GetMapping(value = "/notes")
     public ResponseEntity<Map<String, Object>> getAllNotes(
             @RequestParam(required = false, defaultValue = "-1") int ownerId,

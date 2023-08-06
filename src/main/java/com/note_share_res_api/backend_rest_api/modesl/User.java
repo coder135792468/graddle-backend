@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 @Entity(name="user_details")
 public class User {
 	
-	protected User() {
+	public User() {
 		
 	}
 	@Id
