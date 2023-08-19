@@ -1,31 +1,31 @@
 package com.note_share_res_api.backend_rest_api.modesl;
 
-
-
-import java.util.List;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class Note {
-	
+
 	@Id
 	@GeneratedValue
 	private Integer id;
+	private String uid;
 
-	
-	private String content;
-    
-    @ManyToOne
-    private User owner;
+	private String title;
+	private String desc;
+	private String qualification;
+	private String author;
+	private String file;
+	private String subject;
+	private Integer likes;
+	private Integer download;
 
-	@OneToMany
-	private List<User> likes;
-     
+	public Note() {
+		this.likes = 0;
+		this.download = 0;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -34,33 +34,81 @@ public class Note {
 		this.id = id;
 	}
 
-	public String getContent() {
-		return content;
+	public String getDesc() {
+		return desc;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
-	}
-    public User getUser() {
-		return owner;
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 
-	public void setUser(User owner) {
-		this.owner = owner;
+	public String getUid() {
+		return uid;
 	}
 
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
 
-	public void setLikes(List<User> likes){
+	public String getFile() {
+		return file;
+	}
+
+	public void setFile(String file) {
+		this.file = file;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getQualification() {
+		return qualification;
+	}
+
+	public void setQualification(String qualification) {
+		this.qualification = qualification;
+	}
+
+	public void setLikes(Integer likes) {
 		this.likes = likes;
 	}
 
-	public List<User> getLikes(){
+	public Integer getLikes() {
 		return likes;
+	}
+
+	public void setdownload(Integer download) {
+		this.download = download;
+	};
+
+	public Integer getDownload() {
+		return download;
 	}
 
 	@Override
 	public String toString() {
-		return "Note [id=" + id + ", content=" + content + "]";
+		return "Note [id=" + id + ", desc=" + desc + "]";
 	}
 
 }
