@@ -18,11 +18,9 @@ public class Note {
 	private String author;
 	private String file;
 	private String subject;
-	private Integer likes;
-	private Integer download;
+	public Integer download;
 
 	public Note() {
-		this.likes = 0;
 		this.download = 0;
 	}
 
@@ -88,14 +86,6 @@ public class Note {
 
 	public void setQualification(String qualification) {
 		this.qualification = qualification;
-	}
-
-	public void setLikes(Integer likes) {
-		this.likes = likes;
-	}
-
-	public Integer getLikes() {
-		return likes;
 	}
 
 	public void setdownload(Integer download) {

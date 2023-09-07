@@ -31,10 +31,11 @@ public class NoteController {
     @CrossOrigin
     @GetMapping(value = "/notes")
     public ResponseEntity<Map<String, Object>> getAllNotes(
-            @RequestParam(required = false, defaultValue = "-1") int ownerId,
+            @RequestParam(required = false, defaultValue = "-1") String ownerId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size,
-            @RequestParam(defaultValue = "id,desc") String[] sort) {
+            @RequestParam(defaultValue = "id,desc") String[] sort,
+            @RequestParam(required = false, defaultValue = "") String search) {
         try {
             List<Sort.Order> orders = new ArrayList<Sort.Order>();
 
@@ -51,7 +52,9 @@ public class NoteController {
             Pageable pagingSort = PageRequest.of(page, size, Sort.by(orders));
 
             Page<Note> notesPage;
-            if (ownerId == -1)
+            if (search.length() > 0) {
+                notesPage = noteService.searchNotes(search.toLowerCase(), pagingSort);
+            } else if (ownerId == "-1" || search.length() == 0)
                 notesPage = noteService.findAll(pagingSort);
             else
                 notesPage = noteService.findByUid(ownerId, pagingSort);
@@ -71,20 +74,23 @@ public class NoteController {
     }
 
     @CrossOrigin
-    @PostMapping(value = "/notes")
-    public ResponseEntity<Note> addNote(@RequestBody Note noteData) {
+    @GetMapping(value = "/notes/{postId}")
+    public ResponseEntity<Object> findNoteById(@PathVariable int postId) {
         try {
-            Note currNote = new Note();
-            currNote.setDesc(noteData.getDesc());
-            currNote.setFile(noteData.getFile());
-            currNote.setSubject(noteData.getSubject());
-            currNote.setTitle(noteData.getTitle());
-            currNote.setQualification(noteData.getQualification());
-            currNote.setAuthor(noteData.getAuthor());
-            currNote.setUid(noteData.getUid());
+            Object note = noteService.findById(postId).get();
+            return new ResponseEntity<>(note, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
-            Note note = noteService.save(noteData);
-            return new ResponseEntity<>(note, HttpStatus.CREATED);
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/notes/owner/{ownerId}")
+    public ResponseEntity<Integer> getUserDownloadCount(@PathVariable String ownerId) {
+        try {
+            return new ResponseEntity<>(noteService.getDownloadCount(ownerId).stream().map(a -> a.download)
+                    .mapToInt(Integer::intValue).sum(), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
