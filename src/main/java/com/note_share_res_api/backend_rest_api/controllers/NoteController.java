@@ -31,7 +31,7 @@ public class NoteController {
     @CrossOrigin
     @GetMapping(value = "/notes")
     public ResponseEntity<Map<String, Object>> getAllNotes(
-            @RequestParam(required = false, defaultValue = "-1") String ownerId,
+            @RequestParam(required = false, defaultValue = "") String ownerId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size,
             @RequestParam(defaultValue = "id,desc") String[] sort,
@@ -52,12 +52,17 @@ public class NoteController {
             Pageable pagingSort = PageRequest.of(page, size, Sort.by(orders));
 
             Page<Note> notesPage;
-            if (search.length() > 0) {
-                notesPage = noteService.searchNotes(search.toLowerCase(), pagingSort);
-            } else if (ownerId == "-1" || search.length() == 0)
-                notesPage = noteService.findAll(pagingSort);
-            else
+            if (ownerId.length() == 0) {
+                if (search.length() > 0) {
+                    notesPage = noteService.searchNotes(search.toLowerCase(), pagingSort);
+                } else if (search.length() == 0)
+                    notesPage = noteService.findAll(pagingSort);
+                else
+                    notesPage = noteService.findByUid(ownerId, pagingSort);
+
+            } else {
                 notesPage = noteService.findByUid(ownerId, pagingSort);
+            }
 
             notes = notesPage.getContent();
 
@@ -94,6 +99,27 @@ public class NoteController {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @CrossOrigin
+    @PostMapping(value = "/notes")
+    public ResponseEntity<Note> addNote(@RequestBody Note noteData) {
+        try {
+            Note currNote = new Note();
+            currNote.setDesc(noteData.getDesc());
+            currNote.setFile(noteData.getFile());
+            currNote.setSubject(noteData.getSubject());
+            currNote.setTitle(noteData.getTitle());
+            currNote.setQualification(noteData.getQualification());
+            currNote.setAuthor(noteData.getAuthor());
+            currNote.setUid(noteData.getUid());
+
+            Note note = noteService.save(noteData);
+            return new ResponseEntity<>(note, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     @DeleteMapping(value = "/notes/{postId}")

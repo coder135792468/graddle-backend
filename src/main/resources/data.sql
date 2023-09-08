@@ -19,7 +19,7 @@ values (
     'Some interesting question on math you must try!!!',
     '11th',
     'Rahul',
-    'https://firebasestorage.googleapis.com/v0/b/notes-share-3ba29.appspot.com/o/files%2Fdocument.pdf?alt=media&token=f4cc093b-8b21-43fb-b94c-e6c0e2628ecc',
+    'https://firebasestorage.googleapis.com/v0/b/notes-share-3ba29.appspot.com/o/files%2Fmaths%20W1-4.pdf?alt=media&token=16992d41-cfb2-4fcc-9e1a-d95065832fc9',
     'Math',
      1
 );
@@ -32,7 +32,7 @@ values (
     'Some interesting question on math you must try!!!',
     '11th',
     'Rahul',
-    'https://firebasestorage.googleapis.com/v0/b/notes-share-3ba29.appspot.com/o/files%2Fdocument.pdf?alt=media&token=f4cc093b-8b21-43fb-b94c-e6c0e2628ecc',
+    'https://firebasestorage.googleapis.com/v0/b/notes-share-3ba29.appspot.com/o/files%2Fmaths%20W1-4.pdf?alt=media&token=16992d41-cfb2-4fcc-9e1a-d95065832fc9',
     'Math',
      1
 );
