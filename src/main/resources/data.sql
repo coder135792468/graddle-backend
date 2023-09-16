@@ -36,3 +36,6 @@ values (
     'Math',
      1
 );
+
+insert into library(id,uid,note_id)
+values (100001, '2390487293847',1003)

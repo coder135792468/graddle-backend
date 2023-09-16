@@ -11,9 +11,9 @@ import com.note_share_res_api.backend_rest_api.repository.*;
 public class NoteController {
 
     NoteRepository noteService;
-    UserRepository userService;
+    LibraryRepository userService;
 
-    NoteController(NoteRepository noteService, UserRepository userService) {
+    NoteController(NoteRepository noteService, LibraryRepository userService) {
         this.noteService = noteService;
         this.userService = userService;
     }
