@@ -1,6 +1,7 @@
 package com.note_share_res_api.backend_rest_api.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.note_share_res_api.backend_rest_api.modesl.*;
 
 public interface NoteRepository extends JpaRepository<Note, Integer> {
+    Optional<Note> findById(Integer id);
+
     Page<Note> findByUid(String ownerId, Pageable pageable);
 
     Page<Note> findByTitle(String query, Pageable pageable);
