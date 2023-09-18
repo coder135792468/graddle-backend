@@ -67,7 +67,7 @@ public class LibraryController {
             library = libraryPage.getContent();
 
             Map<String, Object> response = new HashMap<>();
-            response.put("library", library);
+            response.put("notes", library);
             response.put("currentPage", libraryPage.getNumber());
             response.put("totalItems", libraryPage.getTotalElements());
             response.put("totalPages", libraryPage.getTotalPages());
