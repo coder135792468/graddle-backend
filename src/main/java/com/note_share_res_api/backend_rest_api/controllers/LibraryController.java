@@ -107,7 +107,7 @@ public class LibraryController {
         try {
             Optional<Library> library = libraryService.findById(libraryId);
             if (library.isEmpty()) {
-                return new ResponseEntity<>("Note has been deleted", HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>("Note has been deleted", HttpStatus.OK);
             }
 
             System.out.print(library.get().getUid());
