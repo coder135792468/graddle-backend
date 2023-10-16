@@ -82,16 +82,22 @@ public class LibraryController {
 
     @CrossOrigin
     @PostMapping(value = "/library")
-    public ResponseEntity<Object> saveLibraryNote(@RequestParam(defaultValue = "-1") int noteId,
+    public ResponseEntity<Object> saveLibraryNote(@RequestParam(defaultValue = "-1") Integer noteId,
             @RequestParam(defaultValue = "-1") String userId) {
         try {
             Optional<Note> note = noteService.findById(noteId);
             if (note.isEmpty()) {
                 return new ResponseEntity<>("Note doesn't exits", HttpStatus.BAD_REQUEST);
             }
+
+            List<Library> noteInLibrary = libraryService.getLibaryNote(noteId);
+            if (noteInLibrary.size() > 0) {
+                return new ResponseEntity<>("Already Saved In Library", HttpStatus.CREATED);
+            }
             Library library = new Library();
             library.setNote(note.get());
             library.setUid(userId);
+            library.setNoteId(noteId);
             Library currData = libraryService.save(library);
             System.out.print(currData);
             return new ResponseEntity<>("Post created successfully", HttpStatus.CREATED);
