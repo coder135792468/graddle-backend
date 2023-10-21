@@ -17,11 +17,12 @@ public interface NoteRepository extends JpaRepository<Note, Integer> {
 
     Page<Note> findByUid(String ownerId, Pageable pageable);
 
-    Page<Note> findByTitle(String query, Pageable pageable);
+    @Query(value = "SELECT * FROM Note n WHERE n.approved = true", nativeQuery = true)
+    Page<Note> findAll(Pageable pageable);
 
-    @Query(value = "SELECT * FROM Note n where n.uid = :ownerId", nativeQuery = true)
+    @Query(value = "SELECT * FROM Note n where n.uid = :ownerId AND n.approved = true", nativeQuery = true)
     List<Note> getDownloadCount(@PathVariable String ownerId);
 
-    @Query(value = "SELECT * FROM Note n WHERE lower(n.title) LIKE CONCAT('%', :query, '%')", nativeQuery = true)
+    @Query(value = "SELECT * FROM Note n WHERE lower(n.title) LIKE CONCAT('%', :query, '%') AND n.approved = true", nativeQuery = true)
     Page<Note> searchNotes(String query, Pageable pageable);
 }

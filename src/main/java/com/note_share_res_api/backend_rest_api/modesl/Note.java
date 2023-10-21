@@ -1,5 +1,7 @@
 package com.note_share_res_api.backend_rest_api.modesl;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -19,9 +21,12 @@ public class Note {
 	private String file;
 	private String subject;
 	public Integer download;
+	@JsonIgnore
+	private Boolean approved = false;
 
 	public Note() {
 		this.download = 0;
+		this.approved = false;
 	}
 
 	public Integer getId() {
@@ -94,6 +99,14 @@ public class Note {
 
 	public Integer getDownload() {
 		return download;
+	}
+
+	public Boolean getApproved() {
+		return this.approved;
+	};
+
+	public void setApproved(Boolean approved) {
+		this.approved = approved;
 	}
 
 	@Override
