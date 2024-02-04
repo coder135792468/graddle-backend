@@ -53,4 +53,11 @@ public class NoteController {
         }
     }
 
+    @CrossOrigin
+    @GetMapping(value = "/library/{id}")
+    public ResponseEntity<Optional<Library>> getCurNote(@PathVariable Integer id) {
+        Optional<Library> notes = noteService.findById(id);
+        return new ResponseEntity<>(notes, HttpStatus.OK);
+    }
+
 }

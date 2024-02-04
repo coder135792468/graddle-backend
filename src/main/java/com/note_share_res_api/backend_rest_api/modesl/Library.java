@@ -24,7 +24,7 @@ public class Library {
 	private String date;
 	public Integer views;
 
-	List<String> note;
+	String note;
 
 	public Library(Integer id, String semester) {
 		super();
@@ -50,11 +50,11 @@ public class Library {
 		this.semester = semester;
 	}
 
-	public void setNote(List<String> note) {
+	public void setNote(String note) {
 		this.note = note;
 	};
 
-	public List<String> getNote() {
+	public String getNote() {
 		return this.note;
 	}
 
