@@ -19,4 +19,6 @@ public interface NoteRepository extends JpaRepository<Library, Integer> {
 
     @Query(value = "SELECT * FROM Library n WHERE lower(n.items) LIKE CONCAT('%', :query, '%') OR lower(n.course) LIKE CONCAT('%', :query, '%')", nativeQuery = true)
     Page<Library> searchNotes(String query, Pageable pageable);
+
+    Library save(Optional<Library> curLibrary);
 }

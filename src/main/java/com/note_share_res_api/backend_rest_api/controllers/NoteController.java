@@ -21,7 +21,7 @@ public class NoteController {
     public ResponseEntity<Map<String, Object>> getAllNotes(
             @RequestParam(required = false, defaultValue = "") String college,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(defaultValue = "10") int size,
             @RequestParam(required = false, defaultValue = "") String search) {
         try {
             List<Sort.Order> orders = new ArrayList<Sort.Order>();
@@ -58,6 +58,18 @@ public class NoteController {
     public ResponseEntity<Optional<Library>> getCurNote(@PathVariable Integer id) {
         Optional<Library> notes = noteService.findById(id);
         return new ResponseEntity<>(notes, HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @PostMapping(value = "/note")
+    public ResponseEntity<Library> addLibrary(@RequestBody Library library) {
+        try {
+            Library lib = noteService.save(library);
+            return new ResponseEntity<>(lib, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
 }

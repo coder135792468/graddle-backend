@@ -3,7 +3,6 @@ package com.note_share_res_api.backend_rest_api.modesl;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import java.util.*;
 
 @Entity
 public class Library {
