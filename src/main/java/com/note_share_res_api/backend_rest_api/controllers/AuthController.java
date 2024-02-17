@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.note_share_res_api.backend_rest_api.entity.ReqRes;
 import com.note_share_res_api.backend_rest_api.service.AuthService;
 import com.note_share_res_api.backend_rest_api.service.JWTUtils;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,21 +25,25 @@ public class AuthController {
     @Autowired
     private JWTUtils jwt;
 
+    @CrossOrigin
     @PostMapping("/signup")
     public ResponseEntity<ReqRes> signUp(@RequestBody ReqRes signUpRequest) {
         return ResponseEntity.ok(authService.signUp(signUpRequest));
     }
 
+    @CrossOrigin
     @PostMapping("/signin")
     public ResponseEntity<ReqRes> signIn(@RequestBody ReqRes signInRequest) {
         return ResponseEntity.ok(authService.signIn(signInRequest));
     }
 
+    @CrossOrigin
     @GetMapping("/getInfo")
     public ResponseEntity<String> getInfo(@RequestParam String token) {
         return ResponseEntity.ok(jwt.extractUsername(token));
     }
 
+    @CrossOrigin
     @PostMapping("/refresh")
     public ResponseEntity<ReqRes> refreshToken(@RequestBody ReqRes refreshTokenRequest) {
         return ResponseEntity.ok(authService.refreshToken(refreshTokenRequest));

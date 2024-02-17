@@ -61,7 +61,7 @@ public class NoteController {
     }
 
     @CrossOrigin
-    @PostMapping(value = "/note/add")
+    @PostMapping(value = "/library")
     public ResponseEntity<Library> addLibrary(@RequestBody Library library) {
         try {
             Library lib = noteService.save(library);
