@@ -3,6 +3,7 @@ package com.note_share_res_api.backend_rest_api.controllers;
 import java.util.*;
 import org.springframework.data.domain.*;
 import org.springframework.http.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.note_share_res_api.backend_rest_api.modesl.*;
 import com.note_share_res_api.backend_rest_api.repository.*;
@@ -61,7 +62,8 @@ public class NoteController {
     }
 
     @CrossOrigin
-    @PostMapping(value = "/library")
+    @PostMapping(value = "/note/add")
+    @PreAuthorize("hasAuthority('ADMIN_ROLE')")
     public ResponseEntity<Library> addLibrary(@RequestBody Library library) {
         try {
             Library lib = noteService.save(library);

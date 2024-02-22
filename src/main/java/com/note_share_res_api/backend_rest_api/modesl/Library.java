@@ -1,5 +1,7 @@
 package com.note_share_res_api.backend_rest_api.modesl;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -23,6 +25,7 @@ public class Library {
 	private String date;
 	public Integer views;
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING)
 	String note;
 
 	public Library(Integer id, String semester) {
