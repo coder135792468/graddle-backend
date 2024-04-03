@@ -33,7 +33,7 @@ public class NoteController {
 
             Page<Library> notesPage;
             if (college.length() > 0) {
-                if (search.length() > 0) {
+                if (search.length() > 1) {
                     notesPage = noteService.findByCollegeAndCourse(college.toLowerCase(), search.toLowerCase(),
                             pagingSort);
                 } else {
